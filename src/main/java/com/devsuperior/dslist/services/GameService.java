@@ -6,7 +6,6 @@ import com.devsuperior.dslist.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,8 +16,10 @@ public class GameService {
 
     public List<GameMinDTO> findAll() {
         List<Game> result = repository.findAll();
-
         return result.stream().map(GameMinDTO::new).toList();
+    }
 
+    public GameMinDTO findById(Long id){
+        return repository.findById(id).map(GameMinDTO::new).orElseThrow();
     }
 }
